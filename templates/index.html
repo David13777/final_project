@@ -1,0 +1,37 @@
+{% extends 'default.html' %}
+
+{% block title %}Объявления{% endblock title %}
+
+{% block content %}
+    <!-- Проверка наличия публикаций -->
+    <br><br>
+    {% if posts %}
+        <!-- Список объявлений -->
+        {% for post in posts %}
+            <div class="mb-4">
+                <a href="/post/{{ post.id }}" class="text-decoration-none" style="font-size: 20px;">
+                    <b>{{ post.title }}</b>
+                </a>
+                <br>
+                <span class="text-muted" style="font-size: 12px;">
+                    <b>Автор: {{ post.author }} | Дата публикации: {{ post.dateCreation|date:'d.M.Y' }} г.</b>
+                </span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <!-- Сообщение при отсутствии публикаций -->
+        <div class="mt-5">
+            <h2>Публикаций нет!</h2>
+        </div>
+    {% endif %}
+
+    <!-- Кнопка добавления объявления для авторизованных пользователей -->
+    {% if user.is_authenticated %}
+        <div class="mt-5">
+            <a class="btn btn-primary" href="{% url 'create_ad' %}" role="button">
+                <i class="bi bi-plus-circle"></i> Добавить новое объявление
+            </a>
+        </div>
+    {% endif %}
+{% endblock content %}
+

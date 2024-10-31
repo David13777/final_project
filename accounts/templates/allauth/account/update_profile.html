@@ -1,0 +1,27 @@
+{% extends 'default.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Profile Update{% endblock %}
+
+{% block content %}
+    <!-- Заголовок страницы -->
+    <br><br>
+    <h2 class="mb-4">Редактирование профиля:</h2>
+
+    <!-- Форма редактирования профиля -->
+    <form method="post" class="mb-3">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% buttons submit='Сохранить изменения' button_type='primary' %}{% endbuttons %}
+    </form>
+
+    <!-- Кнопки управления -->
+    <div class="d-flex justify-content-start gap-2">
+        <a class="btn btn-outline-secondary" href="{% url 'account_profile' %}" role="button">
+            <i class="bi bi-arrow-left-circle"></i> Закрыть
+        </a>
+        <a class="btn btn-danger" href="{% url 'account_logout' %}" role="button">
+            <i class="bi bi-box-arrow-right"></i> Выйти из аккаунта
+        </a>
+    </div>
+{% endblock content %}
